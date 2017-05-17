@@ -47,10 +47,12 @@ class CSS extends \Kirby\Component\CSS {
 
     }
 
-    if (file_exists($url)) {
-      $modified = filemtime($url);
-      $filename = f::name($url) . '.' . $modified . '.' . f::extension($url);
-      $dirname  = f::dirname($url);
+    $file_url = preg_replace("#^/#", null, $url);
+
+    if (file_exists($file_url)) {
+      $modified = filemtime($file_url);
+      $filename = f::name($file_url) . '.' . $modified . '.' . f::extension($file_url);
+      $dirname  = f::dirname($file_url);
 
       $url = ($dirname === '.') ? $filename : $dirname . '/' . $filename;
     }
@@ -94,11 +96,13 @@ class JS extends \Kirby\Component\JS {
       $src = preg_replace('#^' . $this->kirby->urls()->index() . '/#', null, $src);
 
     }
-
-    if (file_exists($src)) {
-      $modified = filemtime($src);
-      $filename = f::name($src) . '.' . $modified . '.' . f::extension($src);
-      $dirname  = f::dirname($src);
+	
+    $file_src = preg_replace("#^/#", null, $src);
+	
+    if (file_exists($file_src)) {
+      $modified = filemtime($file_src);
+      $filename = f::name($file_src) . '.' . $modified . '.' . f::extension($file_src);
+      $dirname  = f::dirname($file_src);
 
       $src = ($dirname === '.') ? $filename : $dirname . '/' . $filename;
     }

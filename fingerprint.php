@@ -26,8 +26,8 @@ class CSS extends \Kirby\Component\CSS {
    * @param null|string $media
    * @return string
    */
-    
-  public function tag($url, $media = null) {
+
+  public function tag($url, $media = null, $path = false) {
 
     if(is_array($url)) {
       $css = array();
@@ -58,11 +58,16 @@ class CSS extends \Kirby\Component\CSS {
       $url = ($dirname === '.') ? $filename : $dirname . '/' . $filename;
     }
 
-    return html::tag('link', null, array(
-      'rel'   => 'stylesheet',
-      'href'  => url($url),
-      'media' => $media
-    ));
+    if($path === true) {
+      return url($url);
+    }
+    else {
+      return html::tag('link', null, array(
+        'rel'   => 'stylesheet',
+        'href'  => url($url),
+        'media' => $media
+      ));
+    }
 
   }
 }
@@ -77,7 +82,7 @@ class JS extends \Kirby\Component\JS {
    * @return string
    */
 
-  public function tag($src, $async = false) {
+  public function tag($src, $async = false, $path = false) {
 
     if(is_array($src)) {
       $js = array();
@@ -108,10 +113,15 @@ class JS extends \Kirby\Component\JS {
       $src = ($dirname === '.') ? $filename : $dirname . '/' . $filename;
     }
 
-    return html::tag('script', '', array(
-      'src'   => url($src),
-      'async' => $async
-    ));
+    if($path === true) {
+      return url($src);
+    }
+    else {
+      return html::tag('script', '', array(
+        'src'   => url($src),
+        'async' => $async
+      ));
+    }
 
   }
 }

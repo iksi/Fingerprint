@@ -13,7 +13,7 @@ use c;
 use f;
 use HTML;
 
-if ( ! c::get('fingerprint')) {
+if ( ! c::get('plugin.fingerprint')) {
     return;
 }
 

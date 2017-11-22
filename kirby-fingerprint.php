@@ -23,11 +23,12 @@ class CSS extends \Kirby\Component\CSS {
    * Builds the html link tag for the given css file
    *
    * @param string $url
+   * @param boolean $path
    * @param null|string $media
    * @return string
    */
 
-  public function tag($url, $media = null, $path = false) {
+  public function tag($url, $path = false, $media = null) {
 
     if(is_array($url)) {
       $css = array();
@@ -78,11 +79,12 @@ class JS extends \Kirby\Component\JS {
    * Builds the html script tag for the given js file
    *
    * @param string $src
+   * @param boolean path
    * @param boolean async
    * @return string
    */
 
-  public function tag($src, $async = false, $path = false) {
+  public function tag($src, $path = false, $async = false) {
 
     if(is_array($src)) {
       $js = array();
